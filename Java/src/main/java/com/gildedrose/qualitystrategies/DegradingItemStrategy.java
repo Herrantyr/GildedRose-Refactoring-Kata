@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gildedrose.qualityHandlers;
+package com.gildedrose.qualitystrategies;
 
 import com.gildedrose.Item;
 import com.gildedrose.inventory.GildedRoseInventoryItems;
@@ -10,7 +10,7 @@ import com.gildedrose.inventory.GildedRoseInventoryItems;
  * @author bart.vanderplancken
  *
  */
-public abstract class DegradingItemQualityHandler extends ItemQualityHandler {
+public abstract class DegradingItemStrategy extends ItemStrategy {
 	
 	private static final int MIN_QUALITY = 0;
 

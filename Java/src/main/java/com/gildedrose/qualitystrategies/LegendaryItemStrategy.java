@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gildedrose.qualityHandlers;
+package com.gildedrose.qualitystrategies;
 
 import com.gildedrose.Item;
 
@@ -9,7 +9,7 @@ import com.gildedrose.Item;
  * @author bart.vanderplancken
  *
  */
-public class LegendaryItemQualityHandler extends ItemQualityHandler {
+public class LegendaryItemStrategy extends ItemStrategy {
 	
 	@Override
 	public void updateSellInValue(Item item) {

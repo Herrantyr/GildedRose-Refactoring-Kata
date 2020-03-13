@@ -1,10 +1,10 @@
 package com.gildedrose;
 
 import com.gildedrose.inventory.GildedRoseInventoryItems;
-import com.gildedrose.qualityHandlers.DegradingItemQualityHandler;
-import com.gildedrose.qualityHandlers.EnhancingItemQualityHandler;
-import com.gildedrose.qualityHandlers.ItemQualityHandler;
-import com.gildedrose.qualityHandlers.LegendaryItemQualityHandler;
+import com.gildedrose.qualitystrategies.DegradingItemStrategy;
+import com.gildedrose.qualitystrategies.EnhancingItemStrategy;
+import com.gildedrose.qualitystrategies.ItemStrategy;
+import com.gildedrose.qualitystrategies.LegendaryItemStrategy;
 
 class GildedRose {
 	
@@ -18,21 +18,20 @@ class GildedRose {
 		for (int i = 0; i < items.length; i++) {
 			Item item = items[i];
 			
-			ItemQualityHandler itemQualityHandler = getItemQualityHandler(item.name);
-			int qualityOffset = itemQualityHandler.determineQualityOffset(item);
-			itemQualityHandler.updateItemQuality(item, qualityOffset);
-			itemQualityHandler.updateSellInValue(item);
+			ItemStrategy itemStrategy = getItemStrategy(item.name);
+			itemStrategy.updateItemQuality(item);
+			itemStrategy.updateSellInValue(item);
 		}
     }
 
-	private ItemQualityHandler getItemQualityHandler(String itemName) {
+	private ItemStrategy getItemStrategy(String itemName) {
 		if(isEnhancingItem(itemName)) {
-			return new EnhancingItemQualityHandler() {
+			return new EnhancingItemStrategy() {
 			};
 		} else if (isLegendaryItem(itemName)) {
-			return new LegendaryItemQualityHandler();
+			return new LegendaryItemStrategy();
 		} else {
-			return new DegradingItemQualityHandler() {
+			return new DegradingItemStrategy() {
 			};
 		}
 	}

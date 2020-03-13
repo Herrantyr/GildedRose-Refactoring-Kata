@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.gildedrose.qualityHandlers;
+package com.gildedrose.qualitystrategies;
 
 import com.gildedrose.Item;
 import com.gildedrose.inventory.GildedRoseInventoryItems;
@@ -10,7 +10,7 @@ import com.gildedrose.inventory.GildedRoseInventoryItems;
  * @author bart.vanderplancken
  *
  */
-public abstract class EnhancingItemQualityHandler extends ItemQualityHandler{
+public abstract class EnhancingItemStrategy extends ItemStrategy{
 	
 	private static final int MAX_QUALITY = 50;
 	
