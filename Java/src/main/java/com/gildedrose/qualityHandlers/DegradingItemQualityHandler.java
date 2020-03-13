@@ -4,12 +4,13 @@
 package com.gildedrose.qualityHandlers;
 
 import com.gildedrose.Item;
+import com.gildedrose.inventory.GildedRoseInventoryItems;
 
 /**
  * @author bart.vanderplancken
  *
  */
-public class DegradingItemQualityHandler extends ItemQualityHandler {
+public abstract class DegradingItemQualityHandler extends ItemQualityHandler {
 	
 	private static final int MIN_QUALITY = 0;
 
@@ -17,6 +18,36 @@ public class DegradingItemQualityHandler extends ItemQualityHandler {
 	public void updateItemQuality(Item item, int qualityOffset) {
 		degradeItemQuality(item, qualityOffset);
 
+	}
+	
+	@Override
+	public int determineQualityOffset(Item item) {
+		return determineDegradingQualityOffset(item);
+		
+	}
+	
+	/**
+	 * @param item
+	 * @return
+	 */
+	private int determineDegradingQualityOffset(Item item) {
+		int qualityOffset = 1;
+		if(item.sellIn <= 0) {
+			qualityOffset *=2;
+		}
+		if(isConjuredItem(item.name)) {
+			qualityOffset *= 2;
+		}
+		return qualityOffset;
+	}
+	
+	
+	/**
+	 * @param name
+	 * @return
+	 */
+	private boolean isConjuredItem(String name) {
+		return name.equals(GildedRoseInventoryItems.CONJURED_MANA_CAKE);
 	}
 	
 	/**

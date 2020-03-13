@@ -19,5 +19,7 @@ public abstract class ItemQualityHandler {
 	}
 	
 	public abstract void updateItemQuality(Item item, int qualityOffset);
+	
+	public abstract int determineQualityOffset(Item item);
 
 }
