@@ -1,14 +1,12 @@
 package com.gildedrose;
 
+import com.gildedrose.inventory.GildedRoseInventoryItems;
+import com.gildedrose.qualityHandlers.DegradingItemQualityHandler;
+import com.gildedrose.qualityHandlers.EnhancingItemQualityHandler;
+import com.gildedrose.qualityHandlers.ItemQualityHandler;
+
 class GildedRose {
 	
-    private static final int MIN_QUALITY = 0;
-	private static final int MAX_QUALITY = 50;
-	public static final String AGED_BRIE = "Aged Brie";
-	public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
-	public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-	public static final String CONJURED_MANA_CAKE = "Conjured Mana Cake";
-    
 	Item[] items;
 
     public GildedRose(Item[] items) {
@@ -22,25 +20,38 @@ class GildedRose {
 				continue;
 			}
 			// update quality
+			int qualityOffset = 0;
 			if (isEnhancingItem(item.name)) {
-				int qualityOffset = determineEnhancingQualityOffset(item);
-				item.quality = Integer.min(item.quality + qualityOffset, MAX_QUALITY);
+				qualityOffset = determineEnhancingQualityOffset(item);
 			} else {
-				int qualityOffset = determineDegradingQualityOffset(item);
-				item.quality = Integer.max(MIN_QUALITY, item.quality - qualityOffset);
+				qualityOffset = determineDegradingQualityOffset(item);
 			}
 			
 			// update sell in value
-			item.sellIn -= 1;
+			ItemQualityHandler itemQualityHandler = getItemQualityHandler(item.name);
+			itemQualityHandler.updateItemQuality(item, qualityOffset);
+			itemQualityHandler.updateSellInValue(item);
 		}
     }
+
+	private ItemQualityHandler getItemQualityHandler(String itemName) {
+		if(isEnhancingItem(itemName)) {
+			return new EnhancingItemQualityHandler() {
+			};
+		} else {
+			return new DegradingItemQualityHandler() {
+			};
+		}
+	}
+
+
 
 	/**
 	 * @param name
 	 * @return
 	 */
 	private boolean isLegendaryItem(String name) {
-		return name.equals(SULFURAS_HAND_OF_RAGNAROS);
+		return name.equals(GildedRoseInventoryItems.SULFURAS_HAND_OF_RAGNAROS);
 	}
 
 	/**
@@ -48,7 +59,7 @@ class GildedRose {
 	 * @return
 	 */
 	private boolean isEnhancingItem(String name) {
-		return name.equals(GildedRose.AGED_BRIE) || name.equals(BACKSTAGE_PASSES);
+		return name.equals(GildedRoseInventoryItems.AGED_BRIE) || name.equals(GildedRoseInventoryItems.BACKSTAGE_PASSES);
 	}
 	
 	/**
@@ -56,7 +67,7 @@ class GildedRose {
 	 * @return
 	 */
 	private boolean isConjuredItem(String name) {
-		return name.equals(CONJURED_MANA_CAKE);
+		return name.equals(GildedRoseInventoryItems.CONJURED_MANA_CAKE);
 	}
 	
 	/**
@@ -65,7 +76,7 @@ class GildedRose {
 	 */
 	private int determineEnhancingQualityOffset(Item item) {
 		int qualityOffset = 1;
-		if (item.name.equals(BACKSTAGE_PASSES)) {
+		if (item.name.equals(GildedRoseInventoryItems.BACKSTAGE_PASSES)) {
 			if (isExpiredSale(item.sellIn)) {
 				qualityOffset = -item.quality;
 			} else if (isUrgentSale(item.sellIn)) {
