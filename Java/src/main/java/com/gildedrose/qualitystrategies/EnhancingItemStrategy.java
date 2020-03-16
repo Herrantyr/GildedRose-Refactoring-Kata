@@ -9,7 +9,7 @@ import com.gildedrose.Item;
  * @author bart.vanderplancken
  *
  */
-public abstract class EnhancingItemStrategy extends ItemStrategy{
+public class EnhancingItemStrategy extends ItemStrategy{
 	
 	private static final int MAX_QUALITY = 50;
 	

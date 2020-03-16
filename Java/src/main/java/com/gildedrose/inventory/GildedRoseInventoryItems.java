@@ -5,8 +5,8 @@ package com.gildedrose.inventory;
 
 import com.gildedrose.qualitystrategies.BackstageItemStrategy;
 import com.gildedrose.qualitystrategies.ConjuredItemStrategy;
-import com.gildedrose.qualitystrategies.DefaultDegradingItemStrategy;
-import com.gildedrose.qualitystrategies.DefaultEnhancingItemStrategy;
+import com.gildedrose.qualitystrategies.DegradingItemStrategy;
+import com.gildedrose.qualitystrategies.EnhancingItemStrategy;
 import com.gildedrose.qualitystrategies.ItemStrategy;
 import com.gildedrose.qualitystrategies.LegendaryItemStrategy;
 
@@ -24,10 +24,10 @@ public class GildedRoseInventoryItems {
 	public static final String ELIXIR_OF_THE_MONGOOSE = "Elixir of the Mongoose";
 	
 	private static ItemStrategy backstageItemStrategy = new BackstageItemStrategy();
-	private static ItemStrategy defaultEnhancingStrategy = new DefaultEnhancingItemStrategy();
+	private static ItemStrategy defaultEnhancingStrategy = new EnhancingItemStrategy();
 	private static ItemStrategy legendaryItemStrategy = new LegendaryItemStrategy();
 	private static ItemStrategy conjuredItemStrategy = new ConjuredItemStrategy();
-	private static ItemStrategy defaultDegradingStrategy = new DefaultDegradingItemStrategy();
+	private static ItemStrategy defaultDegradingStrategy = new DegradingItemStrategy();
 	
 	private GildedRoseInventoryItems() {
 		// do nothing
@@ -35,8 +35,8 @@ public class GildedRoseInventoryItems {
 	
 	/**
 	 * find the item strategy belonging to the name of the item
-	 * @param itemName
-	 * @return
+	 * @param itemName name of the item we want to update
+	 * @return the corresponding strategy
 	 */
 	public static ItemStrategy getItemStrategy(String itemName) {
 		switch (itemName) {

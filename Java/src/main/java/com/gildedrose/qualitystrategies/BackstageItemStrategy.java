@@ -18,7 +18,7 @@ public class BackstageItemStrategy extends EnhancingItemStrategy {
 			qualityOffset = -item.quality;
 		} else if (isUrgentSale(item.sellIn)) {
 			qualityOffset += 2;
-		} else if (isExperingSale(item.sellIn)) {
+		} else if (isExpiringSale(item.sellIn)) {
 			qualityOffset += 1;
 		}
 		return qualityOffset;
@@ -38,7 +38,7 @@ public class BackstageItemStrategy extends EnhancingItemStrategy {
 	 * @param sellIn
 	 * @return
 	 */
-	private boolean isExperingSale(int sellIn) {
+	private boolean isExpiringSale(int sellIn) {
 		return sellIn < 11;
 	}
 }
