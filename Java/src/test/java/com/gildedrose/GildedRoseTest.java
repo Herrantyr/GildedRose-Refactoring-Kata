@@ -2,6 +2,8 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
+import com.gildedrose.inventory.GildedRoseInventoryItems;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
@@ -16,7 +18,7 @@ class GildedRoseTest {
     
     @Test 
     void testDexterityVest() {
-    	Item dexVest = new Item("+5 Dexterity Vest", 2, 20);
+    	Item dexVest = new Item(GildedRoseInventoryItems.DEXTERITY_VEST, 2, 20);
     	Item[] items = new Item[] { dexVest };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
@@ -35,7 +37,7 @@ class GildedRoseTest {
     
     @Test 
     void testElixer() {
-    	Item elixer = new Item("Elixir of the Mongoose", 2, 2);
+    	Item elixer = new Item(GildedRoseInventoryItems.ELIXIR_OF_THE_MONGOOSE, 2, 2);
     	Item[] items = new Item[] { elixer };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
@@ -54,7 +56,7 @@ class GildedRoseTest {
     
     @Test 
     void testSulfuras() {
-    	Item sulfuras = new Item(GildedRose.SULFURAS_HAND_OF_RAGNAROS, 0, 80);
+    	Item sulfuras = new Item(GildedRoseInventoryItems.SULFURAS_HAND_OF_RAGNAROS, 0, 80);
     	Item[] items = new Item[] { sulfuras };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
@@ -73,8 +75,8 @@ class GildedRoseTest {
     
     @Test 
     void testAgedBrie() {
-    	Item agedBrie = new Item(GildedRose.AGED_BRIE, 2, 0);
-    	Item qualityBrie = new Item(GildedRose.AGED_BRIE, 2, 48);
+    	Item agedBrie = new Item(GildedRoseInventoryItems.AGED_BRIE, 2, 0);
+    	Item qualityBrie = new Item(GildedRoseInventoryItems.AGED_BRIE, 2, 48);
     	Item[] items = new Item[] { agedBrie, qualityBrie };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
@@ -96,10 +98,10 @@ class GildedRoseTest {
     
     @Test 
     void testBackStage() {
-    	Item newTicket = new Item(GildedRose.BACKSTAGE_PASSES, 15, 20);
-        Item olderTicket = new Item(GildedRose.BACKSTAGE_PASSES, 10, 29);
-        Item urgentTicket = new Item(GildedRose.BACKSTAGE_PASSES, 5, 29);
-        Item experingTicket = new Item(GildedRose.BACKSTAGE_PASSES, 2, 49);
+    	Item newTicket = new Item(GildedRoseInventoryItems.BACKSTAGE_PASSES, 15, 20);
+        Item olderTicket = new Item(GildedRoseInventoryItems.BACKSTAGE_PASSES, 10, 29);
+        Item urgentTicket = new Item(GildedRoseInventoryItems.BACKSTAGE_PASSES, 5, 29);
+        Item experingTicket = new Item(GildedRoseInventoryItems.BACKSTAGE_PASSES, 2, 49);
     	Item[] items = new Item[] { newTicket, olderTicket, urgentTicket, experingTicket };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
@@ -124,21 +126,21 @@ class GildedRoseTest {
     
     @Test 
     void testConjuredItem() {
-    	Item conjuredItem = new Item("Conjured Mana Cake", 3, 6);
+    	Item conjuredItem = new Item(GildedRoseInventoryItems.CONJURED_MANA_CAKE, 3, 6);
     	Item[] items = new Item[] { conjuredItem };
     	GildedRose gildedRose = new GildedRose(items);
     	// day one
     	gildedRose.updateQuality();
     	assertEquals(2, conjuredItem.sellIn);
-    	assertEquals(4, conjuredItem.quality); //TODO this is the feature to get working
+    	assertEquals(4, conjuredItem.quality);
     	// day two
     	gildedRose.updateQuality();
     	assertEquals(1, conjuredItem.sellIn);
-    	assertEquals(2, conjuredItem.quality); //TODO this is the feature to get working
+    	assertEquals(2, conjuredItem.quality);
     	// day three
     	gildedRose.updateQuality();
     	assertEquals(0, conjuredItem.sellIn);
-    	assertEquals(0, conjuredItem.quality); //TODO this is the feature to get working
+    	assertEquals(0, conjuredItem.quality);
     }
     
 
