@@ -9,7 +9,7 @@ import com.gildedrose.Item;
  * @author bart.vanderplancken
  *
  */
-public class DegradingItemStrategy extends ItemStrategy {
+public class DegradingItemStrategy implements ItemStrategy {
 	
 	private static final int MIN_QUALITY = 0;
 

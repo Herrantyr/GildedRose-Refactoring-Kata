@@ -9,7 +9,7 @@ import com.gildedrose.Item;
  * @author bart.vanderplancken
  *
  */
-public class LegendaryItemStrategy extends ItemStrategy {
+public class LegendaryItemStrategy implements ItemStrategy {
 	
 	@Override
 	public void updateSellInValue(Item item) {
